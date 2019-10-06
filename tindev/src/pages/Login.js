@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   KeyboardAvoidingView,
   StyleSheet,
@@ -8,8 +8,16 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
+import api from '../services/api';
+
 import logo from '../assets/logo.png';
-export default function Login() {
+export default function Login({navigation}) {
+  const [user, setUser] = useState('');
+
+  function handleLogin() {
+    console.log(user);
+    navigation.navigate('Main');
+  }
   return (
     <KeyboardAvoidingView
       behavior="padding"
@@ -21,9 +29,11 @@ export default function Login() {
         placeholderTextColor="#999"
         autoCapitalize="none"
         autoCorrect={false}
+        value={user}
+        onChangeText={setUser}
         style={styles.input}
       />
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Entrar</Text>
       </TouchableOpacity>
     </KeyboardAvoidingView>
